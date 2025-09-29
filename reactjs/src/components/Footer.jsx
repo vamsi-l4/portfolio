@@ -159,14 +159,6 @@ export default function Footer() {
                 </div>
             </div>
 
-            {/* Basic Animations (add these to your global CSS or a styled-components file) */}
-            <style jsx>{`
-                .bg-grid-pattern {
-                    background-image:
-                        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-                }
-            `}</style>
         </footer>
     );
 }
