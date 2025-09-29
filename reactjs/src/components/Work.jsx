@@ -140,6 +140,7 @@ export default function Work() {
     const [activeTab, setActiveTab] = useState('projects');
     const [items, setItems] = useState(projects);
     const [showAll, setShowAll] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const canvasRef = useRef(null);
 
     // --- Modal State ---
@@ -178,13 +179,25 @@ export default function Work() {
     };
 
     useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 768px)');
+        setIsMobile(mediaQuery.matches);
+
+        const handleResize = (e) => {
+            setIsMobile(e.matches);
+        };
+
+        mediaQuery.addEventListener('change', handleResize);
+        return () => mediaQuery.removeEventListener('change', handleResize);
+    }, []);
+
+    useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         let animationFrameId;
 
         const particles = [];
-        const particleCount = 50; 
+        const particleCount = isMobile ? 10 : 50; 
         let width = canvas.clientWidth;
         let height = canvas.clientHeight;
 
@@ -260,7 +273,7 @@ export default function Work() {
             cancelAnimationFrame(animationFrameId);
             window.removeEventListener('resize', resizeCanvas);
         };
-    }, [theme]);
+    }, [theme, isMobile]);
 
     const cardVariants = {
         hidden: { opacity: 0, scale: 0.95 },
@@ -335,10 +348,11 @@ export default function Work() {
                                         ${activeTab === "techStack" ? "aspect-square w-full" : "w-full h-full items-start text-left"}`}
                                     variants={activeTab === "techStack" ? techStackVariants : cardVariants}
                                     whileHover="hover"
+                                    whileTap={{ scale: 0.95 }}
                                 >
                                     {activeTab === "techStack" ? (
                                         <>
-                                            {item.icon}
+                                            {React.cloneElement(item.icon, { size: isMobile ? 30 : 40 })}
                                             <h3 className="font-semibold text-sm mt-2">{item.name}</h3>
                                         </>
                                     ) : (

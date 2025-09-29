@@ -1,11 +1,24 @@
 import { useContext, useRef, useEffect } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
-import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa'; // Social Media Icons
+import { FaGithub, FaLinkedinIn, FaInstagram } from 'react-icons/fa'; // Social Media Icons
 import { MdOutlineMail } from 'react-icons/md'; // Mail icon
 
 export default function Footer() {
     const { theme } = useContext(ThemeContext);
+    const [isMobile, setIsMobile] = useState(false);
     const canvasRef = useRef(null);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(max-width: 768px)');
+        setIsMobile(mediaQuery.matches);
+
+        const handleResize = (e) => {
+            setIsMobile(e.matches);
+        };
+
+        mediaQuery.addEventListener('change', handleResize);
+        return () => mediaQuery.removeEventListener('change', handleResize);
+    }, []);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -14,7 +27,7 @@ export default function Footer() {
         let animationFrameId;
 
         const particles = [];
-        const particleCount = 50; // Reduced for section
+        const particleCount = isMobile ? 10 : 50; // Reduced for section and mobile
         let width = canvas.clientWidth;
         let height = canvas.clientHeight;
 
@@ -90,7 +103,7 @@ export default function Footer() {
             cancelAnimationFrame(animationFrameId);
             window.removeEventListener('resize', resizeCanvas);
         };
-    }, [theme]);
+    }, [theme, isMobile]);
 
     return (
         <footer className="w-full px-[5%] md:px-[10%] py-12 relative bg-blue-50/70 dark:bg-blue-900/30 text-gray-800 dark:text-gray-200 overflow-hidden">
@@ -123,23 +136,23 @@ export default function Footer() {
                     <ul className="flex items-center gap-8 justify-center">
                         <li>
                             <a target='_blank' href="https://github.com/vamsi-l4" rel="noopener noreferrer"
-                               className="text-gray-400 hover:text-white transition-colors duration-300 text-3xl">
+                               className="text-gray-400 hover:text-pink-400 transition-colors duration-300 text-3xl">
                                 <FaGithub />
                                 <span className="sr-only">GitHub</span>
                             </a>
                         </li>
                         <li>
-                            <a target='_blank' href="https://www.linkedin.com/in/mulaparhti-krishna-vamsi" rel="noopener noreferrer"
+                            <a target='_blank' href="https://www.linkedin.com/in/mulaparthi-krishna-vamsi-137b7a29a/" rel="noopener noreferrer"
                                className="text-gray-400 hover:text-blue-400 transition-colors duration-300 text-3xl">
                                 <FaLinkedinIn />
                                 <span className="sr-only">LinkedIn</span>
                             </a>
                         </li>
                         <li>
-                            <a target='_blank' href="https://x.com/your-twitter" rel="noopener noreferrer"
-                               className="text-gray-400 hover:text-sky-400 transition-colors duration-300 text-3xl">
-                                <FaTwitter />
-                                <span className="sr-only">Twitter</span>
+                            <a target='_blank' href="https://www.instagram.com/apoplectic_vamsi_034/?next=%2F&hl=en" rel="noopener noreferrer"
+                               className="text-gray-400 hover:text-pink-400 transition-colors duration-300 text-3xl">
+                                <FaInstagram />
+                                <span className="sr-only">Instagram</span>
                             </a>
                         </li>
                     </ul>

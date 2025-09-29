@@ -6,7 +6,7 @@ export default function LenisScroll() {
         const lenis = new Lenis({
             duration: 1.2,
             smoothWheel: true,
-            smoothTouch: false,
+            smoothTouch: true,
             // Offset to account for the fixed Navbar (approx. 64-80px tall)
             // This ensures the element is visible just below the navbar after a hash link click.
             lerp: 0.08, // Added a lerp for slightly less aggressive smoothing

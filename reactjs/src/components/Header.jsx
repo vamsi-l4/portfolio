@@ -27,6 +27,7 @@ const DownloadIcon = (props) => (
 const Header = () => {
   const { theme } = useContext(ThemeContext);
   const [darkMode, setDarkMode] = useState(theme === 'dark');
+  const [isMobile, setIsMobile] = useState(false);
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -40,13 +41,25 @@ const Header = () => {
   }, [theme]);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mediaQuery.matches);
+
+    const handleResize = (e) => {
+      setIsMobile(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleResize);
+    return () => mediaQuery.removeEventListener('change', handleResize);
+  }, []);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let animationFrameId;
 
     const particles = [];
-    const particleCount = 100;
+    const particleCount = isMobile ? 20 : 100;
     let width = window.innerWidth;
     let height = window.innerHeight;
 
@@ -122,7 +135,7 @@ const Header = () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [darkMode]);
+  }, [darkMode, isMobile]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -144,7 +157,7 @@ const Header = () => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: isMobile ? 0.4 : 0.8, ease: "easeOut" } },
   };
 
 
@@ -232,7 +245,7 @@ const Header = () => {
               contact me <ArrowRightIcon className="w-5 h-5" />
             </motion.a>
             <motion.a
-              href="./assets/krishnavamsi-resume.pdf"
+              href="/assets/KrishnaVamsi-Resume.pdf"
               download
               className="px-8 py-3 rounded-full border border-gray-300 dark:border-white/25 text-gray-700 dark:text-white shadow-lg transform hover:scale-105 transition-transform flex items-center gap-2"
               variants={itemVariants}
