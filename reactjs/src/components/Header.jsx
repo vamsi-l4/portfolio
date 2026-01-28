@@ -245,7 +245,7 @@ const Header = () => {
               contact me <ArrowRightIcon className="w-5 h-5" />
             </motion.a>
             <motion.a
-              href="/assets/KrishnaVamsi-Resume.pdf"
+              href="/assets/MY-RESUME..pdf"
               download
               className="px-8 py-3 rounded-full border border-gray-300 dark:border-white/25 text-gray-700 dark:text-white shadow-lg transform hover:scale-105 transition-transform flex items-center gap-2"
               variants={itemVariants}

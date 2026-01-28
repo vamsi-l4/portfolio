@@ -49,6 +49,18 @@ const certificates = [
         image: "./assets/hackathon-logo.png",
         detailsUrl: "#"
     },
+    {
+        name: "Introduction to MongoDB",
+        description: "Completed online course on MongoDB fundamentals including document based databases CRUD operations and basic data modeling.",
+        image: "./assets/mongo-db.png",
+        detailsUrl: "#"
+    },
+    {
+        name: "Full Stack Developer Internship",
+        description: "Completed a four week internship at Enginow working on full stack web development tasks including frontend backend integration and REST API development.",
+        image: "./assets/enginow-internship.png",
+        detailsUrl: "#"
+    },
 ];
 
 // --- Achievements ---
