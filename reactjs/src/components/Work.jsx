@@ -32,6 +32,12 @@ const projects = [
 // --- Certificates ---
 const certificates = [
     {
+        name: "Internship Completion Letter",
+        description: "Completed an internship with Ethara AI from 24/02/2026 to 12/05/2026, focusing on LLM and data-driven AI workflows.",
+        image: "./assets/ethara_certificate.png",
+        detailsUrl: "#"
+    },
+    {
         name: "Python Full Stack Developer",
         description: "Certification from TalentShine.",
         image: "./assets/talentshine-logo.png",
@@ -106,6 +112,8 @@ const techStack = [
 const ImageModal = ({ image, title, onClose }) => {
     if (!image) return null;
 
+    const isPdf = typeof image === 'string' && image.toLowerCase().endsWith('.pdf');
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -130,16 +138,24 @@ const ImageModal = ({ image, title, onClose }) => {
                     &times;
                 </button>
                 <div className="overflow-y-auto w-full h-full rounded-lg bg-white dark:bg-gray-900 flex justify-center items-center">
-                    <img
-                        src={image}
-                        alt={title || "Full view of item"}
-                        className="w-auto h-auto rounded-lg object-contain"
-                        style={{ maxWidth: '100%', maxHeight: 'calc(95vh - 20px)' }}
-                        onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = `https://placehold.co/800x600/EF4444/ffffff?text=Image+Load+Error`;
-                        }}
-                    />
+                    {isPdf ? (
+                        <iframe
+                            src={image}
+                            title={title || "Certificate preview"}
+                            className="w-full min-h-[80vh] rounded-lg border-0"
+                        />
+                    ) : (
+                        <img
+                            src={image}
+                            alt={title || "Full view of item"}
+                            className="w-auto h-auto rounded-lg object-contain"
+                            style={{ maxWidth: '100%', maxHeight: 'calc(95vh - 20px)' }}
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = `https://placehold.co/800x600/EF4444/ffffff?text=Image+Load+Error`;
+                            }}
+                        />
+                    )}
                 </div>
                 <p className="text-center text-sm mt-2 font-semibold text-white dark:text-gray-300 font-Ovo">{title}</p>
             </motion.div>
@@ -409,6 +425,11 @@ export default function Work() {
                                         <motion.button
                                             onClick={(e) => {
                                                 e.preventDefault();
+                                                const detailsUrl = item.detailsUrl || item.image;
+                                                if (detailsUrl && detailsUrl.toLowerCase().endsWith('.pdf')) {
+                                                    window.open(detailsUrl, '_blank', 'noopener,noreferrer');
+                                                    return;
+                                                }
                                                 openModal(item.image, item.name);
                                             }}
                                             initial={{ opacity: 0 }}

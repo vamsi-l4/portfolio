@@ -143,7 +143,7 @@ const Header = () => {
 
   const name = "Krishna Vamsi";
   const title = "Full-Stack Developer";
-  const aboutText = "Passionate software engineer from Andhra Pradesh, India. Skilled in Python, JavaScript, Django, React, and building scalable applications. Currently pursuing B.Tech (ECE, 2023–26).";
+  const aboutText = "Passionate software engineer from Andhra Pradesh, India. Skilled in Python, JavaScript, Django, React, and building scalable applications. B.Tech graduate in Electronics and Communication Engineering (ECE), 2023–2026.";
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -245,7 +245,7 @@ const Header = () => {
               contact me <ArrowRightIcon className="w-5 h-5" />
             </motion.a>
             <motion.a
-              href="/assets/MY-RESUME..pdf"
+              href="/assets/krishna_vamsi_resume..pdf"
               download
               className="px-8 py-3 rounded-full border border-gray-300 dark:border-white/25 text-gray-700 dark:text-white shadow-lg transform hover:scale-105 transition-transform flex items-center gap-2"
               variants={itemVariants}

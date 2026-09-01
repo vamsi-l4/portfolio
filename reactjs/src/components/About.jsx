@@ -40,7 +40,7 @@ export default function AboutSection() {
             iconPrimary: <MdSchool className="text-emerald-400" />,
             description: 'My academic background and qualifications.',
             details: [
-                { icon: null, text: 'B.Tech (ECE) – BVC Institute, 2023–2026 (CGPA 7.27)' },
+                { icon: null, text: 'B.Tech (ECE) – BVC Institute of Technology, 2023–2026 (CGPA 7.27)' },
                 { icon: null, text: 'Diploma (ECE) – DR.BR.A.GMR.POLYTECHNIC, 2020 – 2023 (GPA 7.23)' },
                 { icon: null, text: 'SSC – MJPAPBCW RESIDENTIAL, 2015 – 2020 (GPA : 8.6)' },
             ]
